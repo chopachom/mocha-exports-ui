@@ -1,0 +1,25 @@
+{
+  "name": "exports2",
+  "version": "0.0.1",
+  "description": "Exports interface for Mocha with additional goodies",
+  "main": "exports2.js",
+  "dependencies": {
+    "escape-string-regexp": "^1.0.4",
+    "mocha": "^2.4.5"
+  },
+  "devDependencies": {
+    "bluebird": "^3.3.0",
+    "chai": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "mocha",
+    "interface",
+    "exports",
+    "exports2"
+  ],
+  "author": "Alexander Petrovich <i.cyberface@gmail.com>",
+  "license": "MIT"
+}
