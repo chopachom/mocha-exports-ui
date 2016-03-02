@@ -98,12 +98,21 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
         const fn = obj[key];
         suites[0].beforeEach(function(done) {
           const _this = this;
-          const ret = fn.call(this, function(err, result){
-            if(err) return done(err);
-            _this[key] = result;
-            done();
-          });
-          if(!ret || typeof ret.then !== 'function') return;
+          // function accepts a callback
+          if (fn.length) {
+            return fn.call(this, function(err, result){
+              if(err) return done(err);
+              _this[key] = result;
+              done();
+            })
+          }
+          const ret = fn.call(this);
+          // if it not a promise
+          if(!ret || typeof ret.then !== 'function') {
+            _this[key] = ret;
+            return done();
+          }
+          // and the last case if its promise
           ret.then(function(result){
             _this[key] = result;
             done();

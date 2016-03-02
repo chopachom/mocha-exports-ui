@@ -52,12 +52,16 @@ module.exports = {
         },
         callback: function(done){
           done(null, 'callback')
+        },
+        value: function(){
+          return 'value'
         }
       },
       'adds variables to the context': function() {
         if(this.beforeEach !== 'beforeEach') throw new Error('beforeEach doesn\'t work');
         if(this.promise !== 'promise') throw new Error('let doesn\'t work');
         if(this.callback !== 'callback') throw new Error('let doesn\'t work');
+        if(this.value !== 'value') throw new Error('let doesn\'t work');
       },
       'initializes variables before each test': function(){
         expect(this.count).to.eql(2);
