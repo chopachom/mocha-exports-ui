@@ -75,7 +75,7 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
         const test = new Test(key.slice(1).trim(), fn);
         test.file = file;
         suites[0].addTest(test);
-        var reString = '^' + escapeRe(test.fullTitle()) + '$';
+        const reString = '^' + escapeRe(test.fullTitle()) + '$';
         mocha.grep(new RegExp(reString));
       },
       function regular(key, fn){
@@ -93,12 +93,12 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
   function beforeEach(fn){
     // "let"
     if(typeof fn === 'object'){
-      let obj = fn;
+      const obj = fn;
       Object.keys(obj).map(function(key){
         const fn = obj[key];
         suites[0].beforeEach(function(done) {
           const _this = this;
-          const ret = fn(function(err, result){
+          const ret = fn.call(this, function(err, result){
             if(err) return done(err);
             _this[key] = result;
             done();
@@ -124,6 +124,5 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
 
   function afterEach(fn){
     suites[0].afterEach(fn);
-
   }
 };

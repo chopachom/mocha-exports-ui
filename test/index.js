@@ -44,6 +44,8 @@ module.exports = {
       },
       let: {
         promise: function () {
+          this.count || (this.count = 0);
+          this.count++;
           return new Promise(function(resolve, reject){
             resolve('promise')
           })
@@ -56,7 +58,21 @@ module.exports = {
         if(this.beforeEach !== 'beforeEach') throw new Error('beforeEach doesn\'t work');
         if(this.promise !== 'promise') throw new Error('let doesn\'t work');
         if(this.callback !== 'callback') throw new Error('let doesn\'t work');
+      },
+      'initializes variables before each test': function(){
+        expect(this.count).to.eql(2);
       }
+      // TODO: resets variables after each
+    },
+    'const functionality': {
+      const: {
+        promise: function () {
+          return new Promise(function(resolve, reject){
+            resolve('promise')
+          })
+        }
+      },
+      //'- adds variables to the context only once': null
     }
   }
 };
