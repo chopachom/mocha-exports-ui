@@ -1,7 +1,7 @@
 {
-  "name": "exports2",
+  "name": "mocha-exports-ui",
   "version": "0.0.1",
-  "description": "Exports interface for Mocha with additional goodies",
+  "description": "extended built-in exports interface for Mocha",
   "main": "exports2.js",
   "dependencies": {
     "escape-string-regexp": "^1.0.4",
@@ -16,6 +16,7 @@
   },
   "keywords": [
     "mocha",
+    "ui",
     "interface",
     "exports",
     "exports2"

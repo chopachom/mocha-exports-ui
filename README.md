@@ -1,7 +1,7 @@
 Exports2 UI for Mocha
 =====================
 
-This projects lets you write your Mocha tests in the same way as original exports UI but it adds pending and exclusive tests and shortcuts for assigning variables to the context.
+This projects lets you write your Mocha tests in the same way as original exports UI but it adds pending and exclusive tests and shortcuts like `let` and `const` for assigning variables to the context.
 
 Compare BDD interface and Exports2 interface:
 
@@ -9,7 +9,7 @@ Compare BDD interface and Exports2 interface:
 // exports2 interface:
 module.exports = {
   'User': {
-    // will initialize variables to the context but only once (similar to `beforeAll`)
+    // will add variables to the context but only once (similar to `beforeAll`)
     const: {
       db: function(done){
         connect('some://connection/string', done);
@@ -24,7 +24,9 @@ module.exports = {
         new this.User({name: 'joe', password: 'qwerty', email: 'joe@gmail.com'}).save(done);
       }
     },
+    // a test suite is just an object that can contain other test suites and tests
     '.signup': {
+      // a test
       'returns an error if email exists': function(done){
         new this.User({name: 'another_joe', password: 'qwerty', email: 'joe@gmail.com'}).save(function(err){
           expect(err.message).to.contain('email exists');
@@ -33,9 +35,11 @@ module.exports = {
       }
     },
     '#save': {
+      // adding minus sign will skip the test, this is the same as calling `it.skip`
       '- it hashes password': function(){},
       'omits real password': function(){},
-      '! returns an error if email changed to existing': function(){}
+      // exclamation point makes a test or a suite exclusive, it is equivalent to  `it.only` or `describe.only`
+      '! returns an error if email is changed to existing one': function(){}
     }
   }
 }
