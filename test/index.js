@@ -71,11 +71,19 @@ module.exports = {
     'const functionality': {
       const: {
         promise: function () {
+          this.count || (this.count = 0);
+          this.count++;
           return new Promise(function(resolve, reject){
-            resolve('promise')
+            resolve('const')
           })
         }
       },
+      'adds variables to the context': function(){
+        expect(this.promise).to.be.eql('const');
+      },
+      'initializes variables only once': function(){
+        expect(this.count).to.eql(1)
+      }
       //'- adds variables to the context only once': null
     }
   }

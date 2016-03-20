@@ -1,5 +1,4 @@
 'use strict';
-const util  = require('util');
 const Mocha = require('mocha');
 const Suite = require('mocha/lib/suite');
 const Test  = require('mocha/lib/test');
@@ -20,6 +19,7 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
       }
       const fn = obj[key];
       switch (key) {
+        case 'const':
         case 'before':
           before(fn);
           break;
@@ -43,7 +43,7 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
   }
 
   function isSuite(key, obj){
-    return typeof obj === 'object' && ['let', 'letOnce'].indexOf(key) === -1;
+    return typeof obj === 'object' && ['let', 'const'].indexOf(key) === -1;
   }
 
   function addSuite(obj, key, file, mocha){
@@ -86,45 +86,46 @@ module.exports = Mocha.interfaces['exports2'] = function(suite){
     ]
   }
 
+  function definers(obj, before, after){
+    Object.keys(obj).map(function(key){
+      const fn = obj[key];
+      suites[0][before](function(done) {
+        const _this = this;
+        // function accepts a callback
+        if (fn.length) {
+          return fn.call(this, function(err, result){
+            if(err) return done(err);
+            _this[key] = result;
+            done();
+          })
+        }
+        const ret = fn.call(this);
+        // if it not a promise
+        if(!ret || typeof ret.then !== 'function') {
+          _this[key] = ret;
+          return done();
+        }
+        // and the last case if its promise
+        ret.then(function(result){
+          _this[key] = result;
+          done();
+        }).catch(done);
+      });
+      suites[0][after](function(){
+        delete this[key];
+      })
+    });
+  }
+
   function before(fn){
-    suites[0].beforeAll(fn);
+    if(typeof fn !== 'object') return suites[0].beforeAll(fn);
+    definers(fn, 'beforeAll', 'afterAll');
   }
 
   function beforeEach(fn){
     // "let"
-    if(typeof fn === 'object'){
-      const obj = fn;
-      Object.keys(obj).map(function(key){
-        const fn = obj[key];
-        suites[0].beforeEach(function(done) {
-          const _this = this;
-          // function accepts a callback
-          if (fn.length) {
-            return fn.call(this, function(err, result){
-              if(err) return done(err);
-              _this[key] = result;
-              done();
-            })
-          }
-          const ret = fn.call(this);
-          // if it not a promise
-          if(!ret || typeof ret.then !== 'function') {
-            _this[key] = ret;
-            return done();
-          }
-          // and the last case if its promise
-          ret.then(function(result){
-            _this[key] = result;
-            done();
-          }).catch(done);
-        });
-        suites[0].afterEach(function(){
-          delete this[key];
-        })
-      });
-      return;
-    }
-    suites[0].beforeEach(fn);
+    if(typeof fn !== 'object') return suites[0].beforeEach(fn);
+    definers(fn, 'beforeEach', 'afterEach');
   }
 
   function after(fn) {
