@@ -1,7 +1,7 @@
 Exports2 UI for Mocha
 =====================
 
-This projects lets you write your Mocha tests in the same way as original exports UI but it adds pending and exclusive tests and shortcuts like `let` and `const` for assigning variables to the context.
+This projects lets you write your Mocha tests in the same way as original exports UI but it adds pending and exclusive tests plus shortcuts like `let` and `const` for assigning variables to the context.
 
 Compare BDD interface and Exports2 interface:
 

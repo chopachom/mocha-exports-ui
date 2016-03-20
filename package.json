@@ -22,5 +22,16 @@
     "exports2"
   ],
   "author": "Alexander Petrovich <i.cyberface@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chopachom/mocha-exports-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chopachom/mocha-exports-ui/issues"
+  },
+  "homepage": "https://github.com/chopachom/mocha-exports-ui#readme"
 }
