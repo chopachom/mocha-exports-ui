@@ -84,8 +84,28 @@ See the `test/index.js` file in this repo for an example
 #Usage
 
 - Install the package: `npm install --save-dev mocha-exports-ui`
-- Then just provide the UI name and mocha will automatically require `mocha-exports-ui`:
+- Then just provide the UI name and mocha will automatically require all files:
 `mocha --ui mocha-exports-ui test/index.test.js `
+
+#Benefits
+The whole purpose of the project is to make your tests easier to read. Using this UI you significantly reduce punctuation and repetitive calls to `describe`, `context` and `it`. And because your tests are just plain objectsthis gives you ability to use inheritance, mixins, code  generation and all other techniques that are typical for OOP
+
+#Coming next
+If you have a code base writtend using BDD or TDD UIs you don't necessarily have to rewrite all tests using new UI, you can start using mocha-exports-ui just anywhere in your tests:
+
+```javascript
+const xdescribe = require('mocha-exports-ui').describe;
+describe('some test suite you have', function(){
+  xdescribe({
+    // yay! using mocha-exports-ui 
+    "some feature": {
+      "does something": function(){
+        //...
+      } 
+    }
+  });
+});
+```
 
 ###TODO: 
   - should add `let` and `const` to the error output, for instance instead of `"before each" hook for "adds variables to the context"` it should say `"let" hook for "adds variables to the context"`
