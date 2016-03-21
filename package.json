@@ -19,7 +19,8 @@
     "ui",
     "interface",
     "exports",
-    "exports2"
+    "testing",
+    "bdd"
   ],
   "author": "Alexander Petrovich <i.cyberface@gmail.com>",
   "license": "MIT",

@@ -1,12 +1,12 @@
-Exports2 UI for Mocha
+mocha-exports-ui
 =====================
 
 This projects lets you write your Mocha tests in the same way as original exports UI but it adds pending and exclusive tests plus shortcuts like `let` and `const` for assigning variables to the context.
 
-Compare BDD interface and Exports2 interface:
+Compare BDD interface and mocha-exports-ui interface:
 
 ```javascript
-// exports2 interface:
+// mocha-exports-ui interface:
 module.exports = {
   'User': {
     // will add variables to the context but only once (similar to `beforeAll`)
