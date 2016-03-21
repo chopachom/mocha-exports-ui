@@ -81,5 +81,11 @@ describe('User', function(){
 
 See the `test/index.js` file in this repo for an example
 
+#Usage
+
+- Install the package: `npm install --save-dev mocha-exports-ui`
+- Then just provide the UI name and mocha will automatically require `mocha-exports-ui`:
+`mocha --ui mocha-exports-ui test/index.test.js `
+
 ###TODO: 
   - should add `let` and `const` to the error output, for instance instead of `"before each" hook for "adds variables to the context"` it should say `"let" hook for "adds variables to the context"`

@@ -4,7 +4,7 @@ const Suite = require('mocha/lib/suite');
 const Test  = require('mocha/lib/test');
 const escapeRe = require('escape-string-regexp');
 
-module.exports = Mocha.interfaces['exports2'] = function(suite){
+module.exports = Mocha.interfaces['mocha-exports-ui'] = function(suite){
   const suites = [suite];
   suite.on('require', function(object, file, mocha){
     //inspect(object, file, mocha);

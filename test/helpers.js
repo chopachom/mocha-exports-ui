@@ -20,7 +20,7 @@ module.exports = {
     p = resolveFixturePath(fixturePath);
     args = args || [];
 
-    invokeMocha(args.concat(['--require', path.join(__dirname, '../exports2.js'), '--ui', 'exports2', '--reporter', 'json', p]), function(err, res) {
+    invokeMocha(args.concat(['--require', path.join(__dirname, '../index.js'), '--ui', 'mocha-exports-ui', '--reporter', 'json', p]), function(err, res) {
       if (err) return fn(err);
       try {
         var result = JSON.parse(res.output);
