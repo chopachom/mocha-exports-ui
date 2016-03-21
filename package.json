@@ -12,7 +12,7 @@
     "chai": "^3.5.0"
   },
   "scripts": {
-    "test": "echo"
+    "test": "./node_modules/.bin/mocha --require ./index.js --ui mocha-exports-ui test/index.js --full-trace"
   },
   "keywords": [
     "mocha",
