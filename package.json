@@ -1,6 +1,6 @@
 {
   "name": "mocha-exports-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "extended built-in exports interface for Mocha",
   "main": "index.js",
   "dependencies": {
